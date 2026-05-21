@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>adityaff7052| Web Developer & Student</title>
+    <title>Aditya Singh | Web Developer & Student</title>
     <style>
         /* Base Styles & Theme Variables */
         :root {
@@ -31,6 +31,11 @@
             line-height: 1.6;
         }
 
+        /* Prevents underlying page scroll when forms are open */
+        body.modal-open {
+            overflow: hidden;
+        }
+
         header {
             position: fixed;
             top: 0;
@@ -47,10 +52,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.8rem 2rem; /* Adjusted padding slightly for image integration */
+            padding: 0.8rem 2rem;
         }
 
-        /* Modern Circular Logo Container */
         .logo-container {
             display: flex;
             align-items: center;
@@ -61,9 +65,9 @@
         .logo-img {
             width: 40px;
             height: 40px;
-            border-radius: 50%; /* Makes your photo perfectly circular */
-            object-fit: cover; /* Ensures the image doesn't stretch or distort */
-            border: 2px solid var(--accent); /* Clean orange border ring */
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
         }
 
         .logo-text {
@@ -76,6 +80,7 @@
             display: flex;
             list-style: none;
             gap: 2rem;
+            align-items: center;
         }
 
         nav a {
@@ -87,6 +92,26 @@
 
         nav a:hover {
             color: var(--accent);
+        }
+
+        /* NEW: Curvy Box Styling for the Support Link Button */
+        .nav-support-link {
+            color: var(--accent);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            cursor: pointer;
+            border: 2px solid var(--accent);
+            padding: 0.4rem 1rem;
+            border-radius: 20px; /* Makes the box perfectly curvy */
+            transition: all 0.3s ease;
+        }
+
+        .nav-support-link:hover {
+            background-color: var(--accent);
+            color: #ffffff;
+            transform: scale(1.05);
         }
 
         section {
@@ -170,7 +195,7 @@
             transform: translateY(-2px);
         }
 
-        /* Services Section */
+        /* Services Grid Layout */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -188,6 +213,32 @@
         .service-card h3 {
             color: var(--accent);
             margin-bottom: 1rem;
+        }
+
+        /* Rules Layout Grid */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .rule-card {
+            background-color: var(--card-bg);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            border-top: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .rule-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
         }
 
         /* Skills Section */
@@ -231,7 +282,7 @@
             transform: scale(1.05);
         }
 
-        /* Request Form Pop-up Interface (Modal) */
+        /* Pop-up Modals System */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -247,6 +298,8 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.25s ease;
+            overflow-y: auto;
+            padding: 1rem;
         }
 
         .modal-overlay.active {
@@ -258,7 +311,7 @@
             background-color: white;
             padding: 1.8rem 2rem;
             border-radius: 10px;
-            width: 92%;
+            width: 100%;
             max-width: 420px;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
             transform: translateY(-15px);
@@ -297,12 +350,6 @@
             font-size: 0.9rem;
         }
 
-        .form-group label span {
-            font-weight: 400;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-        }
-
         .form-group input, .form-group textarea {
             width: 100%;
             padding: 0.65rem;
@@ -317,6 +364,10 @@
             box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
         }
 
+        .hidden-step {
+            display: none;
+        }
+
         footer {
             text-align: center;
             padding: 2.5rem;
@@ -328,7 +379,8 @@
 
         @media (max-width: 768px) {
             .hero-title { font-size: 2.5rem; }
-            nav ul { display: none; }
+            nav ul { gap: 0.8rem; }
+            .nav-links-desktop { display: none; }
             .btn-request { padding: 0.8rem 1.5rem; font-size: 1rem; }
             .modal-box { padding: 1.5rem; }
         }
@@ -340,13 +392,14 @@
         <div class="nav-container">
             <a href="#" class="logo-container">
                 <img src="my-logo.jpg" alt="Aditya" class="logo-img" onerror="this.style.display='none'">
-                <span class="logo-text">Aditya Singh.</span>
+                <span class="logo-text">Aditya Devs.</span>
             </a>
             <nav>
                 <ul>
-                    <li><a href="#hero">Home</a></li>
-                    <li><a href="#services">What I Offer</a></li>
-                    <li><a href="#skills">Skills</a></li>
+                    <li class="nav-links-desktop"><a href="#hero">Home</a></li>
+                    <li class="nav-links-desktop"><a href="#services">What I Offer</a></li>
+                    <li class="nav-links-desktop"><a href="#rules">Rules</a></li>
+                    <li><span class="nav-support-link" id="openSupportBtn">💬 Support</span></li>
                 </ul>
             </nav>
         </div>
@@ -381,14 +434,42 @@
         </section>
     </div>
 
-    <section id="skills">
-        <h2 class="section-title">My Learning Toolkit</h2>
-        <div class="skills-list">
-            <div class="skill-item">HTML5</div>
-            <div class="skill-item">CSS3</div>
-            <div class="skill-item">JavaScript</div>
-            <div class="skill-item">Responsive Design</div>
-            <div class="skill-item">Learning Daily</div>
+    <section id="rules">
+        <h2 class="section-title">Rules & Client Guarantees</h2>
+        <div class="rules-grid">
+            <div class="rule-card">
+                <div class="rule-number">01</div>
+                <p><strong>25% Advance Deposit:</strong> I will take 25% of the total project amount before starting your layout design.</p>
+            </div>
+            <div class="rule-card">
+                <div class="rule-number">02</div>
+                <p><strong>75% Money-Back:</strong> Within 3 days of starting, I can pay you back 75% of your money if you change your mind.</p>
+            </div>
+            <div class="rule-card">
+                <div class="rule-number">03</div>
+                <p><strong>7-Days Free Tweaks:</strong> Within 7 days of uploading your program, I will do text or layout changes entirely for free.</p>
+            </div>
+            <div class="rule-card">
+                <div class="rule-number">04</div>
+                <p><strong>15-Days Bug Support:</strong> If you find any functional bugs within 15 days of launch, I will solve them completely free of charge.</p>
+            </div>
+            <div class="rule-card">
+                <div class="rule-number">05</div>
+                <p><strong>QR & Barcode Generation:</strong> If you want a functional QR Code or scan barcode for your live website link, it will cost a small extra charge of just <strong>₹10 INR</strong>.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="alt-section" style="max-width: 100%;">
+        <div class="section-inner" style="padding: 5rem 2rem;">
+            <h2 class="section-title">My Learning Toolkit</h2>
+            <div class="skills-list">
+                <div class="skill-item">HTML5</div>
+                <div class="skill-item">CSS3</div>
+                <div class="skill-item">JavaScript</div>
+                <div class="skill-item">Responsive Design</div>
+                <div class="skill-item">Learning Daily</div>
+            </div>
         </div>
     </section>
 
@@ -407,8 +488,8 @@
                     <input type="text" name="Client Name" id="username" placeholder="Enter your full name">
                 </div>
                 <div class="form-group">
-                    <label for="userphone">Phone Number <span>(Not Compulsory)</span></label>
-                    <input type="tel" name="Phone Number" id="userphone" placeholder="Enter phone number (optional)">
+                    <label for="userphone">Phone Number</label>
+                    <input type="tel" name="Phone Number" id="userphone" placeholder="Enter your phone number">
                 </div>
                 <div class="form-group">
                     <label for="usergmail">Gmail Address</label>
@@ -420,7 +501,7 @@
                 </div>
                 <div class="form-group">
                     <label for="userbudget">Amount you can pay</label>
-                    <input type="text" name="Proposed Budget" id="userbudget" placeholder="e.g., 2000 INR" required>
+                    <input type="text" name="Proposed Budget" id="userbudget" placeholder="e.g., 2000 INR">
                 </div>
                 <input type="hidden" name="_subject" value="New Website Request for Aditya!">
                 <button type="submit" class="btn" style="width: 100%; margin-top: 0.5rem; padding: 0.7rem;">Submit Request</button>
@@ -428,75 +509,146 @@
         </div>
     </div>
 
+    <div class="modal-overlay" id="supportModal">
+        <div class="modal-box">
+            <button class="close-modal" id="closeSupportBtn">✕</button>
+            <h3 style="margin-bottom: 1.2rem; color: var(--accent); font-size: 1.3rem;">💬 Customer Care Desk</h3>
+            
+            <form action="https://formspree.io/f/meedqkaa" method="POST" id="queryForm">
+                <div id="supportStep1">
+                    <div class="form-group">
+                        <label for="supportEmail">Enter your Gmail Address</label>
+                        <input type="email" id="supportEmail" name="Support Client Email" placeholder="example@gmail.com">
+                    </div>
+                    <button type="button" class="btn" id="sendCodeBtn" style="width: 100%; padding: 0.65rem;">Send Verification Code</button>
+                </div>
+
+                <div id="supportStep2" class="hidden-step">
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <label for="verificationCode" style="color: #10b981;">Type the 4-Digit Security Code Sent to Email</label>
+                        <input type="text" id="verificationCode" placeholder="Enter 4 digit code max length" maxlength="4" style="text-align: center; letter-spacing: 0.5rem; font-size: 1.2rem;">
+                    </div>
+                    <button type="button" class="btn" id="verifyCodeBtn" style="width: 100%; padding: 0.65rem;">Verify Code</button>
+                </div>
+
+                <div id="supportStep3" class="hidden-step" style="margin-top: 1rem;">
+                    <div class="form-group">
+                        <label for="supportQuery" style="color: var(--accent);">Write your Question / Query below</label>
+                        <textarea id="supportQuery" name="Client Support Question" rows="4" placeholder="How can I help you? Write query details..."></textarea>
+                    </div>
+                    <input type="hidden" name="_subject" value="New Customer Support Query for Aditya!">
+                    <button type="submit" class="btn" style="width: 100%; padding: 0.7rem; background-color: #10b981;">Submit Query to Aditya</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <footer>
-        <p style="font-size: 1.2rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem;">
-            Thank You for Visiting us !
-        </p>
+        <p style="font-size: 1.2rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem;">Thank You for Visiting us !</p>
         <p>&copy; 2026 Aditya Singh. Learning & Growing.</p>
     </footer>
 
     <script>
-        const modal = document.getElementById('requestModal');
-        const openBtns = document.querySelectorAll('.open-request-btn');
-        const closeBtn = document.getElementById('closeModalBtn');
+        const bodyElement = document.body;
+        const requestModal = document.getElementById('requestModal');
+        const supportModal = document.getElementById('supportModal');
+        const openRequestBtns = document.querySelectorAll('.open-request-btn');
+        const closeRequestBtn = document.getElementById('closeModalBtn');
+        const openSupportBtn = document.getElementById('openSupportBtn');
+        const closeSupportBtn = document.getElementById('closeSupportBtn');
 
-        openBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                modal.classList.add('active');
+        let generatedOtpCode = null;
+
+        function openPopup(targetModal) {
+            targetModal.classList.add('active');
+            bodyElement.classList.add('modal-open');
+        }
+
+        function closeAllPopups() {
+            requestModal.classList.remove('active');
+            supportModal.classList.remove('active');
+            bodyElement.classList.remove('modal-open');
+            resetSupportFlow();
+        }
+
+        openRequestBtns.forEach(btn => btn.addEventListener('click', () => openPopup(requestModal)));
+        closeRequestBtn.addEventListener('click', closeAllPopups);
+        openSupportBtn.addEventListener('click', () => openPopup(supportModal));
+        closeSupportBtn.addEventListener('click', closeAllPopups);
+
+        [requestModal, supportModal].forEach(modalOverlay => {
+            modalOverlay.addEventListener('click', (e) => {
+                if(e.target === modalOverlay) { closeAllPopups(); }
             });
         });
 
-        closeBtn.addEventListener('click', () => {
-            modal.classList.remove('active');
-        });
-
-        modal.addEventListener('click', (e) => {
-            if(e.target === modal) {
-                modal.classList.remove('active');
-            }
-        });
-
+        /* REQUEST FORM VALIDATION LOGIC */
         document.getElementById('submissionForm').addEventListener('submit', function(e) {
             const name = document.getElementById('username').value.trim();
+            const phone = document.getElementById('userphone').value.trim();
             const email = document.getElementById('usergmail').value.trim();
             const details = document.getElementById('userrequest').value.trim();
             const budget = document.getElementById('userbudget').value.trim();
 
-            if (name === "") {
-                e.preventDefault();
-                alert("Please fill in your Name before submitting.");
-                document.getElementById('username').focus();
-                return;
-            }
+            if (name === "") { e.preventDefault(); alert("Please fill in your Name before submitting."); document.getElementById('username').focus(); return; }
+            if (phone === "") { e.preventDefault(); alert("Please fill in your Phone Number before submitting."); document.getElementById('userphone').focus(); return; }
+            if (email === "") { e.preventDefault(); alert("Please fill out your Gmail address."); document.getElementById('usergmail').focus(); return; }
+            if (!email.toLowerCase().endsWith('@gmail.com')) { e.preventDefault(); alert('Please enter a valid working Gmail address (@gmail.com).'); document.getElementById('usergmail').focus(); return; }
+            if (details === "") { e.preventDefault(); alert("Please explain what kind of website you want to build."); document.getElementById('userrequest').focus(); return; }
+            if (budget === "") { e.preventDefault(); alert("Please state the budget or amount you can pay."); document.getElementById('userbudget').focus(); return; }
+        });
 
-            if (email === "") {
-                e.preventDefault();
-                alert("Please fill out your Gmail address.");
-                document.getElementById('usergmail').focus();
-                return;
-            }
+        /* CLIENT SUPPORT PROTOCOL VERIFICATION */
+        const s1 = document.getElementById('supportStep1');
+        const s2 = document.getElementById('supportStep2');
+        const s3 = document.getElementById('supportStep3');
+        const supportEmailField = document.getElementById('supportEmail');
 
-            if (!email.toLowerCase().endsWith('@gmail.com')) {
-                e.preventDefault();
-                alert('Please enter a valid working Gmail address (@gmail.com).');
-                document.getElementById('usergmail').focus();
-                return;
-            }
+        document.getElementById('sendCodeBtn').addEventListener('click', () => {
+            const emailVal = supportEmailField.value.trim();
+            if(emailVal === "") { alert("Please provide a Gmail address first."); supportEmailField.focus(); return; }
+            if(!emailVal.toLowerCase().endsWith('@gmail.com')) { alert("Please enter a valid working Gmail account (@gmail.com)."); supportEmailField.focus(); return; }
 
-            if (details === "") {
-                e.preventDefault();
-                alert("Please explain what kind of website you want to build.");
-                document.getElementById('userrequest').focus();
-                return;
-            }
+            generatedOtpCode = Math.floor(1000 + Math.random() * 9000).toString();
+            alert(`[Simulation Code Engine Alert]\n\nA security code has been transmitted to ${emailVal}.\nYour verification code is: ${generatedOtpCode}`);
+            
+            s1.style.display = 'none';
+            s2.style.display = 'block';
+            document.getElementById('verificationCode').focus();
+        });
 
-            if (budget === "") {
-                e.preventDefault();
-                alert("Please state the budget or amount you can pay.");
-                document.getElementById('userbudget').focus();
-                return;
+        document.getElementById('verifyCodeBtn').addEventListener('click', () => {
+            const userInpCode = document.getElementById('verificationCode').value.trim();
+            if(userInpCode === "") { alert("Please input the verification digits."); return; }
+            
+            if(userInpCode === generatedOtpCode) {
+                alert("Gmail confirmation successful! You can now write your question.");
+                s2.style.display = 'none';
+                s3.style.display = 'block';
+                supportEmailField.readOnly = true;
+                document.getElementById('supportQuery').focus();
+            } else {
+                alert("Incorrect code selection pattern. Please try again.");
             }
         });
+
+        document.getElementById('queryForm').addEventListener('submit', function(e) {
+            const finalQueryTxt = document.getElementById('supportQuery').value.trim();
+            if(finalQueryTxt === "") {
+                e.preventDefault();
+                alert("Query block cannot be empty. Please frame your question text.");
+                document.getElementById('supportQuery').focus();
+            }
+        });
+
+        function resetSupportFlow() {
+            s1.style.display = 'block';
+            s2.style.display = 'none';
+            s3.style.display = 'none';
+            supportEmailField.readOnly = false;
+            document.getElementById('queryForm').reset();
+            generatedOtpCode = null;
+        }
     </script>
 </body>
 </html>
