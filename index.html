@@ -211,7 +211,7 @@
             height: 100%;
             background-color: var(--drawer-bg);
             box-shadow: 10px 0 25px rgba(0, 0, 0, 0.15);
-            z-index: 1511;
+            z-index: 1501;
             transform: translateX(-100%);
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 2rem;
@@ -455,8 +455,6 @@
             font-weight: 600;
             border-bottom: 1px solid var(--border-color);
             font-style: italic;
-            text-align: center;
-            padding: 1rem;
         }
 
         .project-info {
@@ -610,7 +608,6 @@
 </head>
 <body>
 
-    <!-- Header Area -->
     <header>
         <div class="nav-container">
             <button class="hamburger-menu-btn" id="openDrawerBtn">
@@ -622,7 +619,6 @@
                 <span>Menu</span>
             </button>
 
-            <!-- CIRCULAR LOGO IMAGE -->
             <div class="brand-wrapper">
                 <img src="my-logo.jpg" alt="Logo" class="header-logo" onerror="this.style.display='none';">
                 <span class="logo-text">Aditya Devs.</span>
@@ -639,7 +635,6 @@
         </div>
     </header>
 
-    <!-- SIDEBAR DRAWER MENU -->
     <div class="drawer-overlay" id="drawerOverlay"></div>
     <div class="side-drawer" id="sideDrawer">
         <div class="drawer-header">
@@ -661,7 +656,6 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
     <section id="hero">
         <p class="hero-subtitle">Hi, my name is</p>
         <h1 class="hero-title">Aditya Singh.</h1>
@@ -671,7 +665,6 @@
         </div>
     </section>
 
-    <!-- Services Section ("What I Do") -->
     <div class="alt-section" id="services">
         <section class="section-inner tight-section">
             <h2 class="section-title">What I Do</h2>
@@ -692,7 +685,6 @@
         </section>
     </div>
 
-    <!-- Rules & Guarantees Section -->
     <section id="rules" class="tight-section">
         <h2 class="section-title">Rules & Client Guarantees</h2>
         <div class="rules-grid">
@@ -715,13 +707,11 @@
         </div>
     </section>
 
-    <!-- "SOME OF MY PROJECTS" ECO-FRIENDLY SECTION -->
     <div class="alt-section" id="projects">
         <section class="section-inner tight-section">
             <h2 class="section-title">Some of My Projects</h2>
             <div class="projects-grid">
                 
-                <!-- PROJECT CARD 1 -->
                 <div class="project-card">
                     <div class="project-image-placeholder">
                         Project Display Area
@@ -733,7 +723,6 @@
                     </div>
                 </div>
 
-                <!-- PROJECT CARD 2 -->
                 <div class="project-card">
                     <div class="project-image-placeholder">
                         Project Display Area
@@ -745,7 +734,6 @@
                     </div>
                 </div>
 
-                <!-- PROJECT CARD 3 -->
                 <div class="project-card">
                     <div class="project-image-placeholder">
                         Project Display Area
@@ -761,12 +749,10 @@
         </section>
     </div>
 
-    <!-- FLOATING ACTION BUTTON -->
     <div class="floating-request-container">
         <button class="btn-request open-request-btn">⚡ Hire Me</button>
     </div>
 
-    <!-- HIRE ME FORMSPREE MODAL -->
     <div class="modal-overlay" id="requestModal">
         <div class="modal-box">
             <button class="close-modal" id="closeModalBtn">✕</button>
@@ -799,7 +785,6 @@
         </div>
     </div>
 
-    <!-- SUPPORT FORMSPREE MODAL -->
     <div class="modal-overlay" id="supportModal">
         <div class="modal-box">
             <button class="close-modal" id="closeSupportModalBtn">✕</button>
@@ -820,13 +805,11 @@
         </div>
     </div>
 
-    <!-- Footer Area -->
     <footer>
         <p class="footer-thankyou">Thank you for visiting my website.</p>
         <p class="footer-copyright">&copy; 2026 Aditya Singh. Learning & Growing daily.</p>
     </footer>
 
-    <!-- JavaScript Navigation & Engine Controls -->
     <script>
         (function() {
             const bodyElement = document.body;
@@ -864,20 +847,24 @@
             if(closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeDrawer);
             if(drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
 
-            // RELIABLE EXPLICIT THEME SWITCHER LOGIC
+            // FIX: RELIABLE EXPLICIT THEME SWITCHER LOGIC
             if(themeToggle) {
                 themeToggle.addEventListener('click', () => {
+                    // Check if current view is matching standard dark mode settings
                     const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                     
                     if (bodyElement.classList.contains('dark-theme')) {
+                        // Switch back to light explicitly
                         bodyElement.classList.remove('dark-theme');
                         bodyElement.classList.add('light-theme');
                         themeToggle.textContent = "🌓 Theme";
                     } else if (bodyElement.classList.contains('light-theme')) {
+                        // Switch back to dark explicitly
                         bodyElement.classList.remove('light-theme');
                         bodyElement.classList.add('dark-theme');
                         themeToggle.textContent = "☀️ Light";
                     } else {
+                        // Initial toggle state behavior matching system setups
                         if (isSystemDark) {
                             bodyElement.classList.add('light-theme');
                             themeToggle.textContent = "🌓 Theme";
