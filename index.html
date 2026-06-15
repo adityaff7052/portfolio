@@ -6,70 +6,64 @@
     <title>Aditya Singh | Web Developer & Student</title>
 
     <style>
-        /* Base Layout Themes (Light Mode Default) */
+        /* --- PREMIUM PORTAL SCROLLBAR --- */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060b13;
+            border-left: 1px solid #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 50px;
+            border: 2px solid #060b13;
+            transition: background 0.3s ease;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f97316;
+        }
+
+        /* --- THEME VARIATION DESIGN PROTOCOLS --- */
         :root {
-            --bg-color: #ffffff;
-            --section-alt-bg: #fff7ed;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
+            --bg-color: #060b13;
+            --section-alt-bg: #0b1322;
+            --card-bg: #111b2d;
+            --text-main: #f1f5f9;
             --text-muted: #64748b;
             --accent: #f97316;
             --accent-hover: #ea580c;
-            --border-color: #fed7aa;
-            --header-bg: rgba(255, 255, 255, 0.9);
-            --modal-bg: #ffffff;
-            --input-border: #cbd5e1;
-            --drawer-bg: #ffffff;
-            --overlay-bg: rgba(0, 0, 0, 0.4);
+            --border-color: #1e293b;
+            --header-bg: rgba(6, 11, 19, 0.85);
+            --modal-bg: #111b2d;
+            --input-border: #1e293b;
+            --overlay-bg: rgba(0, 0, 0, 0.7);
+            
+            --ripple-speed: 1.0s; 
+            --dust-opacity: 0.4;
+            
+            --box-3d-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 5px 15px rgba(0, 0, 0, 0.4);
+            --border-highlight: rgba(255, 255, 255, 0.05);
+            --text-3d-shadow: 1px 1px 0px #ea580c, 2px 2px 0px #ea580c, 3px 3px 0px #ea580c, 4px 4px 8px rgba(0, 0, 0, 0.8);
         }
 
-        /* FORCE DARK THEME CLASSES FOR COMPACT OVERRIDE CONTROLS */
-        body.dark-theme {
-            --bg-color: #0f172a;
-            --section-alt-bg: #1e1b4b;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #4338ca;
-            --header-bg: rgba(15, 23, 42, 0.9);
-            --modal-bg: #1e293b;
-            --input-border: #475569;
-            --drawer-bg: #1e293b;
-            --overlay-bg: rgba(0, 0, 0, 0.6);
-        }
-
-        /* SYSTEM-LEVEL AUTOMATIC FALLBACK */
-        @media (prefers-color-scheme: dark) {
-            body:not(.light-theme) {
-                --bg-color: #0f172a;
-                --section-alt-bg: #1e1b4b;
-                --card-bg: #1e293b;
-                --text-main: #f8fafc;
-                --text-muted: #94a3b8;
-                --border-color: #4338ca;
-                --header-bg: rgba(15, 23, 42, 0.9);
-                --modal-bg: #1e293b;
-                --input-border: #475569;
-                --drawer-bg: #1e293b;
-                --overlay-bg: rgba(0, 0, 0, 0.6);
-            }
-        }
-
-        /* Manual Light Override forced by javascript button if system dark mode is on */
         body.light-theme {
-            --bg-color: #ffffff;
-            --section-alt-bg: #fff7ed;
+            --bg-color: #f8fafc;
+            --section-alt-bg: #f1f5f9;
             --card-bg: #ffffff;
-            --text-main: #1e293b;
+            --text-main: #0f172a;
             --text-muted: #64748b;
-            --accent: #f97316;
-            --accent-hover: #ea580c;
-            --border-color: #fed7aa;
-            --header-bg: rgba(255, 255, 255, 0.9);
+            --border-color: #e2e8f0;
+            --header-bg: rgba(248, 250, 252, 0.85);
             --modal-bg: #ffffff;
             --input-border: #cbd5e1;
-            --drawer-bg: #ffffff;
             --overlay-bg: rgba(0, 0, 0, 0.4);
+            --dust-opacity: 0.15;
+
+            --box-3d-shadow: 0 20px 40px rgba(15, 23, 42, 0.1), 0 5px 15px rgba(15, 23, 42, 0.05);
+            --border-highlight: rgba(249, 115, 22, 0.1);
+            --text-3d-shadow: 1px 1px 0px #fed7aa, 2px 2px 0px #fed7aa, 3px 3px 0px #fed7aa, 4px 4px 6px rgba(0, 0, 0, 0.15);
         }
 
         * {
@@ -78,26 +72,136 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             scroll-behavior: smooth;
-            transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
-            top: 0 !important;
+            overflow-x: hidden;
         }
 
         body.modal-open {
             overflow: hidden;
         }
 
+        /* --- PRELOADER INTRO SCREEN WITH DYNAMIC CONVERGENCE FLIGHT --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000000;
+            z-index: 20000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity;
+        }
+
+        #preloader.loaded {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .preloader-terminal-container {
+            text-align: center;
+            padding: 2rem;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1), filter 1.0s ease;
+            will-change: transform, opacity, filter;
+            transform-origin: center center;
+        }
+
+        #preloader.loaded .preloader-terminal-container {
+            opacity: 0;
+            filter: blur(5px);
+        }
+
+        .preloader-brand-logo {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #f97316;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 0 25px rgba(249, 115, 22, 0.4);
+            animation: preloaderLogoPulse 1.6s infinite alternate ease-in-out;
+        }
+
+        .preloader-identity-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 0.05rem;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .preloader-welcome-orange {
+            font-size: 2.0rem;
+            font-weight: 800;
+            color: #f97316;
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+            text-shadow: 0 0 10px rgba(249, 115, 22, 0.3);
+        }
+
+        @keyframes preloaderLogoPulse {
+            0% { transform: scale(0.96); box-shadow: 0 0 15px rgba(249, 115, 22, 0.3); }
+            100% { transform: scale(1.04); box-shadow: 0 0 30px rgba(249, 115, 22, 0.7); }
+        }
+
+        /* --- AMBIENT DATA DUST BACKGROUND CANVAS --- */
+        #data-dust-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+            opacity: var(--dust-opacity);
+            transition: opacity 0.5s ease;
+        }
+
+        header, main, footer, .floating-request-container, .modal-overlay, .mobile-navigation-drawer {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- SYSTEM RIPPLE ENGINE CORES --- */
+        #theme-ripple-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            pointer-events: none;
+            will-change: clip-path;
+            clip-path: circle(0% at var(--ripple-x, 0px) var(--ripple-y, 0px));
+        }
+
+        #theme-ripple-layer.animating {
+            animation: cyberRippleExpand var(--ripple-speed) cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes cyberRippleExpand {
+            0% { clip-path: circle(0% at var(--ripple-x, 0px) var(--ripple-y, 0px)); }
+            100% { clip-path: circle(150% at var(--ripple-x, 0px) var(--ripple-y, 0px)); }
+        }
+
+        /* --- NAVIGATION HEADER BAR --- */
         header {
             position: fixed;
             top: 0;
             width: 100%;
             background-color: var(--header-bg);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             z-index: 1000;
             border-bottom: 1px solid var(--border-color);
         }
@@ -117,257 +221,271 @@
             gap: 0.6rem;
         }
 
-        /* CIRCULAR LOGO INTEGRATION */
         .header-logo {
             width: 32px;
             height: 32px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--accent);
-        }
-
-        .hamburger-menu-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: none;
-            border: none;
-            color: var(--text-main);
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 5px;
-        }
-        
-        .hamburger-menu-btn:hover {
-            color: var(--accent);
-        }
-
-        .hamburger-icon {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            width: 20px;
-        }
-
-        .hamburger-icon span {
-            display: block;
-            height: 2.5px;
-            width: 100%;
-            background-color: currentColor;
-            border-radius: 2px;
+            display: inline-block;
+            will-change: transform;
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .logo-text {
             font-size: 1.3rem;
             font-weight: 700;
             color: var(--text-main);
+            letter-spacing: 0.05rem;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.8rem;
         }
 
         nav a {
             color: var(--text-main);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
         }
 
         nav a:hover {
             color: var(--accent);
         }
 
-        /* SIDEBAR DRAWER PANEL */
-        .drawer-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .theme-switch-control {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            background: var(--card-bg);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10001; 
+            will-change: transform;
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.2s;
+        }
+
+        .theme-switch-control:hover {
+            border-color: var(--accent);
+        }
+
+        .theme-switch-control .icon-sun { display: none; }
+        .theme-switch-control .icon-moon { display: block; }
+
+        body.light-theme .theme-switch-control .icon-sun { display: block; }
+        body.light-theme .theme-switch-control .icon-moon { display: none; }
+
+        /* --- MOBILE HAMBURGER MECHANICS --- */
+        .cyber-hamburger-trigger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 26px;
+            height: 18px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 10005;
+        }
+
+        .cyber-hamburger-trigger .menu-bar-line {
             width: 100%;
-            height: 100%;
-            background-color: var(--overlay-bg);
-            backdrop-filter: blur(4px);
-            z-index: 1500;
+            height: 2px;
+            background-color: var(--text-main);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease, background-color 0.3s;
+            border-radius: 4px;
+        }
+
+        .cyber-hamburger-trigger.drawer-active .menu-bar-line:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+            background-color: var(--accent);
+        }
+        .cyber-hamburger-trigger.drawer-active .menu-bar-line:nth-child(2) {
             opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
+        }
+        .cyber-hamburger-trigger.drawer-active .menu-bar-line:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+            background-color: var(--accent);
         }
 
-        .drawer-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .side-drawer {
+        /* --- MOBILE DRAWER NAVIGATION & INTERNAL BACK BUTTON --- */
+        .mobile-navigation-drawer {
             position: fixed;
             top: 0;
-            left: 0;
-            width: 50%;
-            max-width: 400px;
-            min-width: 280px;
-            height: 100%;
-            background-color: var(--drawer-bg);
-            box-shadow: 10px 0 25px rgba(0, 0, 0, 0.15);
-            z-index: 1501;
-            transform: translateX(-100%);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 2rem;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background-color: var(--card-bg);
+            border-left: 1px solid var(--border-color);
+            z-index: 10002;
+            padding: 2.5rem 2rem;
+            box-shadow: var(--box-3d-shadow);
+            transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             display: flex;
             flex-direction: column;
-            border-right: 1px solid var(--border-color);
+            gap: 2rem;
         }
 
-        .side-drawer.active {
-            transform: translateX(0);
+        .mobile-navigation-drawer.drawer-active {
+            right: 0;
         }
 
         .drawer-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 2.5rem;
-            padding-bottom: 1rem;
+            justify-content: flex-start;
             border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
         }
 
-        .drawer-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .close-drawer-btn {
+        .drawer-back-btn {
             background: none;
             border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-muted);
-        }
-
-        .drawer-menu-item {
-            margin-bottom: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
-
-        .drawer-menu-item label {
-            font-size: 0.85rem;
+            color: var(--text-main);
+            font-size: 1.05rem;
             font-weight: 700;
-            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             text-transform: uppercase;
             letter-spacing: 0.05rem;
+            transition: color 0.2s, transform 0.2s;
         }
 
-        .drawer-mode-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: var(--section-alt-bg);
-            padding: 0.8rem 1rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-
-        .drawer-toggle-btn {
-            background: var(--accent);
-            border: none;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-        }
-
-        .drawer-support-btn {
+        .drawer-back-btn:hover {
             color: var(--accent);
-            font-weight: 600;
+            transform: translateX(-3px);
+        }
+
+        .mobile-navigation-drawer ul {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border: 2px solid var(--accent);
-            padding: 0.7rem 1rem;
-            border-radius: 8px;
-            background: transparent;
-            width: 100%;
-            font-size: 1rem;
-            transition: all 0.2s ease;
+            flex-direction: column;
+            list-style: none;
+            gap: 1.5rem;
         }
 
-        .drawer-support-btn:hover {
-            background-color: var(--accent);
-            color: #ffffff;
+        .mobile-navigation-drawer ul li a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 1.15rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08rem;
+            transition: color 0.2s;
+            display: block;
         }
 
-        /* SECTION PADDING CONTROLS */
-        section {
-            padding: 5rem 2rem 5rem 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
+        .mobile-navigation-drawer ul li a:hover {
+            color: var(--accent);
         }
 
-        /* TIGHTENED UP AND DOWN SPACING FOR SERVICES & GUARANTEES */
-        .tight-section {
-            padding-top: 2rem !important;
-            padding-bottom: 2rem !important;
+        /* --- VISIBILITY TRANSITION LIGHTBOX PLATFORMS --- */
+        .scroll-lightbox-container {
+            opacity: 0;
+            transform: translate3d(0, 60px, -100px) rotateX(8deg);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
+            will-change: transform, opacity;
         }
 
-        .alt-section {
-            background-color: var(--section-alt-bg);
-            max-width: 100%;
-        }
-        .alt-section .section-inner {
-            max-width: 1100px;
-            margin: 0 auto;
+        .scroll-lightbox-container.lightbox-visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) rotateX(0deg);
         }
 
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 2rem;
+        .cyber-3d-plate {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-top: 1px solid var(--border-highlight);
+            border-left: 1px solid var(--border-highlight);
+            border-radius: 16px;
+            box-shadow: var(--box-3d-shadow);
+            padding: 3rem;
             position: relative;
-            display: inline-block;
+            clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 0 100%);
         }
 
-        .section-title::after {
+        .futuristic-3d-heading {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08rem;
+            color: var(--text-main);
+            text-shadow: var(--text-3d-shadow);
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .futuristic-3d-heading::after {
             content: '';
             position: absolute;
             left: 0;
-            bottom: -5px;
-            width: 50%;
-            height: 3px;
+            bottom: -8px;
+            width: 60px;
+            height: 4px;
             background-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
         }
 
+        section {
+            padding: 6rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .alt-layout-wrapper {
+            background-color: var(--section-alt-bg);
+            width: 100%;
+        }
+
+        /* --- DISPLAY LAYOUT CONTENT STYLES --- */
         #hero {
-            min-height: 75vh;
+            padding-top: 10rem;
+            min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-top: 8rem;
         }
 
         .hero-subtitle {
             color: var(--accent);
             font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15rem;
+            margin-bottom: 0.6rem;
         }
 
         .hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1rem;
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            text-shadow: var(--text-3d-shadow);
         }
 
         .hero-description {
             color: var(--text-muted);
-            font-size: 1.2rem;
-            max-width: 650px;
+            font-size: 1.25rem;
+            max-width: 700px;
             margin-bottom: 2.5rem;
         }
 
@@ -375,35 +493,82 @@
             display: inline-block;
             background-color: var(--accent);
             color: #ffffff;
-            padding: 0.8rem 1.8rem;
-            border-radius: 5px;
+            padding: 0.9rem 2.2rem;
+            border-radius: 6px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
             border: none;
             cursor: pointer;
-            transition: background-color 0.3s;
+            box-shadow: 0 5px 15px rgba(249, 115, 22, 0.3);
+            transition: all 0.2s ease;
         }
 
         .btn:hover {
             background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(249, 115, 22, 0.45);
         }
 
-        .services-grid {
+        .open-request-btn, .btn-request {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background-color 0.2s;
+        }
+
+        .open-request-btn:hover, .btn-request:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(249, 115, 22, 0.5), 0 4px 10px rgba(0, 0, 0, 0.4);
+            background-color: var(--accent-hover);
+        }
+
+        .open-request-btn::after, .btn-request::after {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border: 2px solid var(--accent);
+            border-radius: inherit;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(1);
+        }
+
+        .open-request-btn:hover::after, .btn-request:hover::after {
+            animation: portalAuraPulseRing 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes portalAuraPulseRing {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.22); opacity: 0; }
+        }
+
+        .interactive-cyber-grid, .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
-        .service-card {
-            background-color: var(--card-bg);
+        .sub-cyber-card, .project-card, .media-highlight-card {
+            background-color: var(--bg-color);
             border: 1px solid var(--border-color);
+            border-radius: 12px;
             padding: 2.5rem 2rem;
-            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease, border-color 0.3s;
         }
 
-        .service-card h3 {
+        .sub-cyber-card:hover, .project-card:hover, .media-highlight-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: var(--box-3d-shadow);
+        }
+
+        .sub-cyber-card h3, .project-card h3, .media-highlight-card h3 {
             color: var(--accent);
+            font-size: 1.4rem;
             margin-bottom: 1rem;
+            font-weight: 700;
         }
 
         .rules-grid {
@@ -413,33 +578,29 @@
         }
 
         .rule-card {
-            background-color: var(--card-bg);
+            background-color: var(--bg-color);
             border-left: 4px solid var(--accent);
-            padding: 1.5rem;
-            border-radius: 0 8px 8px 0;
+            padding: 1.8rem;
+            border-radius: 0 12px 12px 0;
             border-top: 1px solid var(--border-color);
             border-right: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
+            transition: transform 0.2s;
+        }
+
+        .rule-card:hover {
+            transform: translateX(5px);
         }
 
         .rule-number {
-            font-size: 1.5rem;
-            font-weight: 800;
+            font-size: 1.6rem;
+            font-weight: 900;
             color: var(--accent);
             margin-bottom: 0.5rem;
         }
 
-        /* ECO-FRIENDLY PROJECTS GRID */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
         .project-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            padding: 0;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -455,6 +616,25 @@
             font-weight: 600;
             border-bottom: 1px solid var(--border-color);
             font-style: italic;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image-placeholder::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.12), transparent);
+            transform: skewX(-20deg);
+            animation: infiniteRadarScanBeam 3.5s infinite linear;
+        }
+
+        @keyframes infiniteRadarScanBeam {
+            0% { left: -150%; }
+            100% { left: 150%; }
         }
 
         .project-info {
@@ -471,20 +651,59 @@
             color: var(--text-main);
             font-size: 0.75rem;
             font-weight: 700;
-            padding: 0.2rem 0.6rem;
+            padding: 0.2rem 0.7rem;
             border-radius: 20px;
             margin-bottom: 0.8rem;
             align-self: flex-start;
+            text-transform: uppercase;
         }
 
-        .project-info h3 {
-            margin-bottom: 0.5rem;
+        .support-flex-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
         }
 
-        .project-info p {
+        @media (max-width: 850px) {
+            .support-flex-layout { grid-template-columns: 1fr; gap: 2rem;}
+        }
+
+        .support-info-text p {
             color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.4rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+            color: var(--text-muted);
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.85rem;
+            border: 1px solid var(--input-border);
+            border-radius: 6px;
             font-size: 0.95rem;
-            margin-bottom: 1rem;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 8px rgba(249, 115, 22, 0.25);
         }
 
         .floating-request-container {
@@ -497,24 +716,25 @@
         .btn-request {
             background-color: var(--accent);
             color: white;
-            padding: 1rem 2rem;
+            padding: 1rem 2.2rem;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 700;
-            box-shadow: 0 10px 20px rgba(249, 115, 22, 0.4);
+            text-transform: uppercase;
+            box-shadow: 0 10px 25px rgba(249, 115, 22, 0.4);
             border: none;
             cursor: pointer;
         }
 
-        /* POPUP MODALS */
+        /* --- POPUP DIALOG SHELLS --- */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
+            background-color: var(--overlay-bg);
+            backdrop-filter: blur(6px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -532,55 +752,34 @@
 
         .modal-box {
             background-color: var(--modal-bg);
-            padding: 2rem;
-            border-radius: 10px;
+            padding: 3rem 2.5rem;
+            border-radius: 16px;
             width: 100%;
-            max-width: 450px;
+            max-width: 480px;
             position: relative;
             border: 1px solid var(--border-color);
+            box-shadow: var(--box-3d-shadow);
         }
 
         .close-modal {
             position: absolute;
-            top: 0.8rem;
+            top: 1rem;
             right: 1.2rem;
             font-size: 1.4rem;
             background: none;
             border: none;
             cursor: pointer;
             color: var(--text-muted);
+            transition: color 0.2s;
         }
 
-        .form-group {
-            margin-bottom: 1.2rem;
+        .close-modal:hover {
+            color: var(--accent);
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.4rem;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 0.7rem;
-            border: 1px solid var(--input-border);
-            border-radius: 5px;
-            font-size: 0.95rem;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        /* FOOTER THANK YOU NOTE STYLES */
         footer {
             text-align: center;
-            padding: 3rem 2rem;
+            padding: 3.5rem 2rem;
             color: var(--text-muted);
             border-top: 1px solid var(--border-color);
             background-color: var(--section-alt-bg);
@@ -588,39 +787,43 @@
 
         .footer-thankyou {
             font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            opacity: 0.85;
-            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.8rem;
             letter-spacing: 0.02rem;
         }
 
-        .footer-copyright {
-            font-size: 0.9rem;
-        }
-
+        /* --- STAGE SCREEN ARCHITECTURES (RESPONSIVE CORE) --- */
         @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; }
+            .hero-title { font-size: 2.6rem; }
+            
+            /* Hide individual links in header, show only hamburger menu section on mobile devices */
             .nav-links-desktop { display: none; }
-            .side-drawer { width: 75%; }
+            .cyber-hamburger-trigger { display: flex; }
+            
+            .nav-container { padding: 0.8rem 1.2rem; }
+            .cyber-3d-plate { padding: 2rem 1.5rem; }
+            section { padding: 4rem 1rem; }
         }
     </style>
 </head>
 <body>
 
+    <div id="preloader">
+        <div class="preloader-terminal-container">
+            <img src="my-logo.jpg" alt="Logo" class="preloader-brand-logo" onerror="this.style.display='none';">
+            <h1 class="preloader-identity-title">Aditya Devs</h1>
+            <div class="preloader-welcome-orange">Welcome</div>
+        </div>
+    </div>
+
+    <canvas id="data-dust-canvas"></canvas>
+    <div id="theme-ripple-layer"></div>
+
     <header>
         <div class="nav-container">
-            <button class="hamburger-menu-btn" id="openDrawerBtn">
-                <div class="hamburger-icon">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <span>Menu</span>
-            </button>
-
             <div class="brand-wrapper">
-                <img src="my-logo.jpg" alt="Logo" class="header-logo" onerror="this.style.display='none';">
+                <img src="my-logo.jpg" alt="Logo" class="header-logo magnetic-target" onerror="this.style.display='none';">
                 <span class="logo-text">Aditya Devs.</span>
             </div>
             
@@ -628,126 +831,188 @@
                 <ul>
                     <li class="nav-links-desktop"><a href="#hero">Home</a></li>
                     <li class="nav-links-desktop"><a href="#services">Services</a></li>
+                    <li class="nav-links-desktop"><a href="#ai-media">AI Media</a></li>
                     <li class="nav-links-desktop"><a href="#rules">Rules</a></li>
                     <li class="nav-links-desktop"><a href="#projects">Projects</a></li>
+                    <li class="nav-links-desktop"><a href="#support">Support</a></li>
                 </ul>
+
+                <button class="theme-switch-control magnetic-target" id="headerThemeBtn" title="Toggle System Mode Layout">
+                    <span class="icon-moon">🌙</span>
+                    <span class="icon-sun">☀️</span>
+                </button>
+
+                <button class="cyber-hamburger-trigger" id="hamburgerMenuTrigger" aria-label="Toggle Portal Navigation Menu">
+                    <span class="menu-bar-line"></span>
+                    <span class="menu-bar-line"></span>
+                    <span class="menu-bar-line"></span>
+                </button>
             </nav>
         </div>
     </header>
 
-    <div class="drawer-overlay" id="drawerOverlay"></div>
-    <div class="side-drawer" id="sideDrawer">
+    <div class="mobile-navigation-drawer" id="mobileNavigationDrawer">
         <div class="drawer-header">
-            <span class="drawer-title">Settings Menu</span>
-            <button class="close-drawer-btn" id="closeDrawerBtn">✕</button>
+            <button class="drawer-back-btn" id="drawerBackBtn">← Back</button>
         </div>
-
-        <div class="drawer-menu-item">
-            <label>Color Appearance</label>
-            <div class="drawer-mode-row">
-                <span style="font-weight: 500;">Dark Theme</span>
-                <button class="drawer-toggle-btn" id="themeToggle">🌓 Theme</button>
-            </div>
-        </div>
-
-        <div class="drawer-menu-item" style="margin-top: auto; padding-top: 1rem;">
-            <label>Need Help?</label>
-            <button class="drawer-support-btn" id="drawerSupportBtn">💬 Contact Support</button>
-        </div>
+        <ul>
+            <li><a href="#hero" class="drawer-link-target">Home</a></li>
+            <li><a href="#services" class="drawer-link-target">Services</a></li>
+            <li><a href="#ai-media" class="drawer-link-target">AI Media</a></li>
+            <li><a href="#rules" class="drawer-link-target">Rules</a></li>
+            <li><a href="#projects" class="drawer-link-target">Projects</a></li>
+            <li><a href="#support" class="drawer-link-target">Support</a></li>
+        </ul>
     </div>
 
-    <section id="hero">
-        <p class="hero-subtitle">Hi, my name is</p>
-        <h1 class="hero-title">Aditya Singh.</h1>
-        <p class="hero-description">I am a student and a learner. I am new to building websites, which means I can still make mistakes along the way—but I promise to work hard and build your project at a very <strong>low, budget-friendly cost.</strong></p>
-        <div>
-            <button class="btn open-request-btn">Hire Me Now</button>
+    <main>
+        
+        <div class="scroll-lightbox-container">
+            <section id="hero">
+                <p class="hero-subtitle">Hi, my name is</p>
+                <h1 class="hero-title">Aditya Singh.</h1>
+                <p class="hero-description">I am a student and a learner. I am new to building websites, which means I can still make mistakes along the way—but I promise to work hard and build your project at a very <strong>low, budget-friendly cost.</strong></p>
+            </section>
         </div>
-    </section>
 
-    <div class="alt-section" id="services">
-        <section class="section-inner tight-section">
-            <h2 class="section-title">What I Do</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Low Cost</h3>
-                    <p>Because I am a student expanding my programming toolkit, I build completely functional layouts at a very low, affordable cost.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Honest Effort</h3>
-                    <p>I might make mistakes, but I am entirely dedicated to solving layout bugs to ensure your project performs properly.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Mobile Ready</h3>
-                    <p>The layout architecture scales fluidly to adapt and look stunning on mobile platforms, tablet panels, and desktop systems.</p>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <section id="rules" class="tight-section">
-        <h2 class="section-title">Rules & Client Guarantees</h2>
-        <div class="rules-grid">
-            <div class="rule-card">
-                <div class="rule-number">01</div>
-                <p><strong>25% Advance Deposit:</strong> I require a 25% startup commitment advance layout fee before mapping out code designs.</p>
-            </div>
-            <div class="rule-card">
-                <div class="rule-number">02</div>
-                <p><strong>75% Money-Back:</strong> Within 3 initial structural build days, you are fully entitled to a 75% reimbursement refund if plans change.</p>
-            </div>
-            <div class="rule-card">
-                <div class="rule-number">03</div>
-                <p><strong>7-Days Free Tweaks:</strong> Within 7 full layout deployment days, I handle essential text corrections or minor display spacing completely for free.</p>
-            </div>
-            <div class="rule-card">
-                <div class="rule-number">04</div>
-                <p><strong>15-Days Bug Support:</strong> If functional application bugs surface within 15 initial days post-launch, I deploy fixes at no extra charge.</p>
+        <div class="alt-layout-wrapper">
+            <div class="scroll-lightbox-container">
+                <section id="services">
+                    <div class="cyber-3d-plate">
+                        <h2 class="futuristic-3d-heading">What I Do</h2>
+                        <div class="interactive-cyber-grid">
+                            <div class="sub-cyber-card">
+                                <h3>Low Cost</h3>
+                                <p>Because I am a student expanding my programming toolkit, I build completely functional layouts at a very low, affordable cost.</p>
+                            </div>
+                            <div class="sub-cyber-card">
+                                <h3>Honest Effort</h3>
+                                <p>I might make mistakes, but I am entirely dedicated to solving layout bugs to ensure your project performs properly.</p>
+                            </div>
+                            <div class="sub-cyber-card">
+                                <h3>Mobile Ready</h3>
+                                <p>The layout architecture scales fluidly to adapt and look stunning on mobile platforms, tablet panels, and desktop systems.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
-    </section>
 
-    <div class="alt-section" id="projects">
-        <section class="section-inner tight-section">
-            <h2 class="section-title">Some of My Projects</h2>
-            <div class="projects-grid">
-                
-                <div class="project-card">
-                    <div class="project-image-placeholder">
-                        Project Display Area
-                    </div>
-                    <div class="project-info">
-                        <span class="project-badge">Coming Soon</span>
-                        <h3>Awesome Web Project</h3>
-                        <p>A completely customized website design layout that will be deployed right here in the future.</p>
+        <div class="scroll-lightbox-container">
+            <section id="ai-media">
+                <div class="cyber-3d-plate">
+                    <h2 class="futuristic-3d-heading">AI Media Production</h2>
+                    <div class="support-flex-layout">
+                        <div class="support-info-text">
+                            <p style="font-weight: 700; color: var(--accent);">Expanded Digital Services Suite</p>
+                            <p>I am relatively new to editing, but I am actively practicing and building my skills to offer more solutions. I can help you with basic <strong>image editing</strong>, <strong>video editing</strong>, and <strong>logo editing</strong> or modifications.</p>
+                            <p>If you need custom graphics, edited clips, or an adjusted logo to go directly onto your new website, I can take care of both the editing and the web layout together to keep your project simple and highly budget-friendly.</p>
+                        </div>
+                        <div class="media-highlight-card" style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                            <h3>Integrated Service Package</h3>
+                            <p style="margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.95rem;">Hire me to orchestrate both your responsive application space and its localized media requirements simultaneously to secure the best overall project rates.</p>
+                            <button class="btn open-request-btn" style="align-self: flex-start; font-size: 0.85rem;">Inquire Media Plan</button>
+                        </div>
                     </div>
                 </div>
+            </section>
+        </div>
 
-                <div class="project-card">
-                    <div class="project-image-placeholder">
-                        Project Display Area
+        <div class="alt-layout-wrapper">
+            <div class="scroll-lightbox-container">
+                <section id="rules">
+                    <div class="cyber-3d-plate">
+                        <h2 class="futuristic-3d-heading">Rules & Client Guarantees</h2>
+                        <div class="rules-grid">
+                            <div class="rule-card">
+                                <div class="rule-number">01</div>
+                                <p><strong>25% Advance Deposit:</strong> I require a 25% startup commitment advance layout fee before mapping out code designs.</p>
+                            </div>
+                            <div class="rule-card">
+                                <div class="rule-number">02</div>
+                                <p><strong>75% Money-Back:</strong> Within 3 initial structural build days, you are fully entitled to a 75% reimbursement refund if plans change.</p>
+                            </div>
+                            <div class="rule-card">
+                                <div class="rule-number">03</div>
+                                <p><strong>7-Days Free Tweaks:</strong> Within 7 full layout deployment days, I handle essential text corrections or minor display spacing completely for free.</p>
+                            </div>
+                            <div class="rule-card">
+                                <div class="rule-number">04</div>
+                                <p><strong>15-Days Bug Support:</strong> If functional application bugs surface within 15 initial days post-launch, I deploy fixes at no extra charge.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="project-info">
-                        <span class="project-badge">Coming Soon</span>
-                        <h3>Responsive Platform</h3>
-                        <p>A beautiful application built to display flawlessly on phones, computing tablets, and screens.</p>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image-placeholder">
-                        Project Display Area
-                    </div>
-                    <div class="project-info">
-                        <span class="project-badge">Coming Soon</span>
-                        <h3>E-Commerce Layout</h3>
-                        <p>An entry-level clean portfolio or store prototype showcasing smooth front-end design structures.</p>
-                    </div>
-                </div>
-
+                </section>
             </div>
-        </section>
-    </div>
+        </div>
+
+        <div class="scroll-lightbox-container">
+            <section id="projects">
+                <div class="cyber-3d-plate">
+                    <h2 class="futuristic-3d-heading">Some of My Projects</h2>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-image-placeholder">Project Display Area</div>
+                            <div class="project-info">
+                                <span class="project-badge">Coming Soon</span>
+                                <h3>Awesome Web Project</h3>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">A completely customized website design layout that will be deployed right here in the future.</p>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-image-placeholder">Project Display Area</div>
+                            <div class="project-info">
+                                <span class="project-badge">Coming Soon</span>
+                                <h3>Responsive Platform</h3>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">A beautiful application built to display flawlessly on phones, computing tablets, and screens.</p>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-image-placeholder">Project Display Area</div>
+                            <div class="project-info">
+                                <span class="project-badge">Coming Soon</span>
+                                <h3>E-Commerce Layout</h3>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">An entry-level clean portfolio or store prototype showcasing smooth front-end design structures.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="alt-layout-wrapper">
+            <div class="scroll-lightbox-container">
+                <section id="support">
+                    <div class="cyber-3d-plate">
+                        <h2 class="futuristic-3d-heading">Support Desk</h2>
+                        <div class="support-flex-layout">
+                            <div class="support-info-text">
+                                <p style="font-weight: 700; color: var(--accent);">Have Questions or Layout Concerns?</p>
+                                <p>Need clarifying details on project architectures, payment milestone schedules, or customized design configurations? Drop your direct verification parameters into our query management terminal.</p>
+                                <p>I systematically evaluate incoming feedback submissions daily and guarantee a rapid analytical reply timeframe back to your inbox.</p>
+                            </div>
+                            <div>
+                                <form action="https://formspree.io/f/meedqkaa" method="POST" class="staticSupportForm">
+                                    <div class="form-group">
+                                        <label>Your Gmail Address</label>
+                                        <input type="email" name="_replyto" class="userSupportEmailInput" placeholder="example@gmail.com" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>What is your question or problem?</label>
+                                        <textarea name="Support Message Content" rows="4" placeholder="Write your core message details here..." required></textarea>
+                                    </div>
+                                    <input type="hidden" name="_subject" value="New Customer Support Terminal Message Submission!">
+                                    <button type="submit" class="btn open-request-btn" style="width: 100%;">Submit Inquiry Ticket</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+    </main>
 
     <div class="floating-request-container">
         <button class="btn-request open-request-btn">⚡ Hire Me</button>
@@ -756,7 +1021,7 @@
     <div class="modal-overlay" id="requestModal">
         <div class="modal-box">
             <button class="close-modal" id="closeModalBtn">✕</button>
-            <h3 style="margin-bottom: 1.5rem; color: var(--accent); font-size: 1.4rem;">Send Project Request</h3>
+            <h3 style="margin-bottom: 1.5rem; color: var(--accent); font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.05rem;">Send Project Request</h3>
             
             <form action="https://formspree.io/f/meedqkaa" method="POST" id="submissionForm">
                 <div class="form-group">
@@ -785,26 +1050,6 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="supportModal">
-        <div class="modal-box">
-            <button class="close-modal" id="closeSupportModalBtn">✕</button>
-            <h3 style="margin-bottom: 1.5rem; color: var(--accent); font-size: 1.4rem;">💬 Contact Support</h3>
-            
-            <form action="https://formspree.io/f/meedqkaa" method="POST" id="supportForm">
-                <div class="form-group">
-                    <label>Your Gmail Address</label>
-                    <input type="email" name="_replyto" id="supportEmail" placeholder="example@gmail.com" required>
-                </div>
-                <div class="form-group">
-                    <label>What is your question or problem?</label>
-                    <textarea name="Support Message Content" rows="5" placeholder="Write your message here..." required></textarea>
-                </div>
-                <input type="hidden" name="_subject" value="New Customer Support Message Submission!">
-                <button type="submit" class="btn" style="width: 100%; padding: 0.8rem; margin-top: 0.5rem;">Submit Message</button>
-            </form>
-        </div>
-    </div>
-
     <footer>
         <p class="footer-thankyou">Thank you for visiting my website.</p>
         <p class="footer-copyright">&copy; 2026 Aditya Singh. Learning & Growing daily.</p>
@@ -814,66 +1059,187 @@
         (function() {
             const bodyElement = document.body;
             const requestModal = document.getElementById('requestModal');
-            const supportModal = document.getElementById('supportModal');
-            const sideDrawer = document.getElementById('sideDrawer');
-            const drawerOverlay = document.getElementById('drawerOverlay');
-            
             const openRequestBtns = document.querySelectorAll('.open-request-btn');
             const closeModalBtn = document.getElementById('closeModalBtn');
-            const closeSupportModalBtn = document.getElementById('closeSupportModalBtn');
             
-            const openDrawerBtn = document.getElementById('openDrawerBtn');
-            const closeDrawerBtn = document.getElementById('closeDrawerBtn');
-            const drawerSupportBtn = document.getElementById('drawerSupportBtn');
-            const themeToggle = document.getElementById('themeToggle');
+            // --- CONVERGENT FLIGHT INTRO RUNTIME CONTROLLER ---
+            window.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    const preloaderElement = document.getElementById('preloader');
+                    const preloaderContent = document.querySelector('.preloader-terminal-container');
+                    const headerBrandTarget = document.querySelector('.brand-wrapper');
+                    const orangeWelcomeWord = document.querySelector('.preloader-welcome-orange');
 
-            // Handle Menu Drawer opening
-            function openDrawer() {
-                sideDrawer.classList.add('active');
-                drawerOverlay.classList.add('active');
-                bodyElement.style.overflow = 'hidden';
-            }
+                    if(preloaderElement && preloaderContent && headerBrandTarget) {
+                        const sourceBox = preloaderContent.getBoundingClientRect();
+                        const targetBox = headerBrandTarget.getBoundingClientRect();
 
-            // Handle Menu Drawer closing
-            function closeDrawer() {
-                sideDrawer.classList.remove('active');
-                drawerOverlay.classList.remove('active');
-                if(!requestModal.classList.contains('active') && !supportModal.classList.contains('active')) {
-                    bodyElement.style.overflow = '';
-                }
-            }
+                        const sourceCenterX = sourceBox.left + (sourceBox.width / 2);
+                        const sourceCenterY = sourceBox.top + (sourceBox.height / 2);
+                        const targetCenterX = targetBox.left + (targetBox.width / 2);
+                        const targetCenterY = targetBox.top + (targetBox.height / 2);
 
-            if(openDrawerBtn) openDrawerBtn.addEventListener('click', openDrawer);
-            if(closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeDrawer);
-            if(drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+                        const distanceX = targetCenterX - sourceCenterX;
+                        const distanceY = targetCenterY - sourceCenterY;
 
-            // FIX: RELIABLE EXPLICIT THEME SWITCHER LOGIC
-            if(themeToggle) {
-                themeToggle.addEventListener('click', () => {
-                    // Check if current view is matching standard dark mode settings
-                    const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                    
-                    if (bodyElement.classList.contains('dark-theme')) {
-                        // Switch back to light explicitly
-                        bodyElement.classList.remove('dark-theme');
-                        bodyElement.classList.add('light-theme');
-                        themeToggle.textContent = "🌓 Theme";
-                    } else if (bodyElement.classList.contains('light-theme')) {
-                        // Switch back to dark explicitly
-                        bodyElement.classList.remove('light-theme');
-                        bodyElement.classList.add('dark-theme');
-                        themeToggle.textContent = "☀️ Light";
-                    } else {
-                        // Initial toggle state behavior matching system setups
-                        if (isSystemDark) {
-                            bodyElement.classList.add('light-theme');
-                            themeToggle.textContent = "🌓 Theme";
-                        } else {
-                            bodyElement.classList.add('dark-theme');
-                            themeToggle.textContent = "☀️ Light";
+                        if (orangeWelcomeWord) {
+                            orangeWelcomeWord.style.transition = 'opacity 0.3s ease';
+                            orangeWelcomeWord.style.opacity = '0';
                         }
+
+                        preloaderContent.style.transform = `translate(${distanceX}px, ${distanceY}px) scale(0.32)`;
+                        preloaderElement.classList.add('loaded');
                     }
+                }, 1800); 
+            });
+
+            // --- NAVIGATION DRAWER LOGIC CORE ---
+            const hamburgerMenuTrigger = document.getElementById('hamburgerMenuTrigger');
+            const mobileNavigationDrawer = document.getElementById('mobileNavigationDrawer');
+            const drawerBackBtn = document.getElementById('drawerBackBtn');
+            const drawerLinkTargets = document.querySelectorAll('.drawer-link-target');
+
+            if(mobileNavigationDrawer) {
+                function toggleDrawerState() {
+                    hamburgerMenuTrigger.classList.toggle('drawer-active');
+                    mobileNavigationDrawer.classList.toggle('drawer-active');
+                    bodyElement.classList.toggle('modal-open');
+                }
+
+                function collapseDrawerStructure() {
+                    if (hamburgerMenuTrigger) hamburgerMenuTrigger.classList.remove('drawer-active');
+                    mobileNavigationDrawer.classList.remove('drawer-active');
+                    bodyElement.classList.remove('modal-open');
+                }
+
+                if (hamburgerMenuTrigger) hamburgerMenuTrigger.addEventListener('click', toggleDrawerState);
+                if (drawerBackBtn) drawerBackBtn.addEventListener('click', collapseDrawerStructure);
+                drawerLinkTargets.forEach(link => link.addEventListener('click', collapseDrawerStructure));
+            }
+
+            // --- THEME SWEEP MECHANICS ---
+            const headerThemeBtn = document.getElementById('headerThemeBtn');
+            const rippleLayer = document.getElementById('theme-ripple-layer');
+
+            if(headerThemeBtn && rippleLayer) {
+                headerThemeBtn.addEventListener('click', function(e) {
+                    const btnRect = headerThemeBtn.getBoundingClientRect();
+                    const absoluteCenterX = btnRect.left + (btnRect.width / 2);
+                    const absoluteCenterY = btnRect.top + (btnRect.height / 2);
+
+                    rippleLayer.style.setProperty('--ripple-x', absoluteCenterX + 'px');
+                    rippleLayer.style.setProperty('--ripple-y', absoluteCenterY + 'px');
+
+                    const stateWillBeLight = !bodyElement.classList.contains('light-theme');
+                    rippleLayer.style.backgroundColor = stateWillBeLight ? '#f8fafc' : '#060b13';
+
+                    rippleLayer.classList.remove('animating');
+                    void rippleLayer.offsetWidth; 
+                    rippleLayer.classList.add('animating');
+
+                    setTimeout(() => {
+                        if(stateWillBeLight) {
+                            bodyElement.classList.add('light-theme');
+                        } else {
+                            bodyElement.classList.remove('light-theme');
+                        }
+                    }, 450); 
+
+                    setTimeout(() => {
+                        rippleLayer.classList.remove('animating');
+                    }, 1000); 
                 });
+            }
+
+            // --- AMBIENT DATA DUST GRAPHICS ---
+            const dustCanvas = document.getElementById('data-dust-canvas');
+            if(dustCanvas) {
+                const ctx = dustCanvas.getContext('2d');
+                let dustArr = [];
+                const maxDustPoints = 45;
+
+                function resizeDustCanvas() {
+                    dustCanvas.width = window.innerWidth;
+                    dustCanvas.height = window.innerHeight;
+                }
+                resizeDustCanvas();
+                window.addEventListener('resize', resizeDustCanvas);
+
+                class MicroDustParticle {
+                    constructor() {
+                        this.reset();
+                        this.y = Math.random() * dustCanvas.height;
+                    }
+                    reset() {
+                        this.x = Math.random() * dustCanvas.width;
+                        this.y = dustCanvas.height + 10;
+                        this.size = Math.random() * 1.5 + 0.5;
+                        this.speedY = -(Math.random() * 0.4 + 0.15);
+                        this.alphaValue = Math.random() * 0.5 + 0.2;
+                    }
+                    update() {
+                        this.y += this.speedY;
+                        if(this.y < -10) this.reset();
+                    }
+                    draw() {
+                        ctx.fillStyle = `rgba(249, 115, 22, ${this.alphaValue})`;
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                for(let i = 0; i < maxDustPoints; i++) {
+                    dustArr.push(new MicroDustParticle());
+                }
+
+                function runDustLoop() {
+                    ctx.clearRect(0, 0, dustCanvas.width, dustCanvas.height);
+                    dustArr.forEach(particle => {
+                        particle.update();
+                        particle.draw();
+                    });
+                    requestAnimationFrame(runDustLoop);
+                }
+                runDustLoop();
+            }
+
+            // --- MAGNETIC PULL ENGINE ---
+            const magneticElements = document.querySelectorAll('.magnetic-target');
+            magneticElements.forEach(element => {
+                element.addEventListener('mousemove', (e) => {
+                    const dimensions = element.getBoundingClientRect();
+                    const centerX = dimensions.left + (dimensions.width / 2);
+                    const centerY = dimensions.top + (dimensions.height / 2);
+                    
+                    const distanceX = e.clientX - centerX;
+                    const distanceY = e.clientY - centerY;
+
+                    element.style.transform = `translate(${distanceX * 0.28}px, ${distanceY * 0.28}px)`;
+                });
+
+                element.addEventListener('mouseleave', () => {
+                    element.style.transform = 'translate(0px, 0px)';
+                });
+            });
+
+            // --- VIEWPORT SCROLL OBSERVATION ---
+            const lightboxes = document.querySelectorAll('.scroll-lightbox-container');
+            if(lightboxes.length > 0) {
+                const viewportObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if(entry.isIntersecting) {
+                            entry.target.classList.add('lightbox-visible');
+                        } else {
+                            entry.target.classList.remove('lightbox-visible');
+                        }
+                    });
+                }, {
+                    threshold: 0.10, 
+                    rootMargin: "0px 0px -15px 0px"
+                });
+
+                lightboxes.forEach(box => viewportObserver.observe(box));
             }
 
             function openPopup(modal) {
@@ -883,39 +1249,22 @@
 
             function closePopups() {
                 requestModal.classList.remove('active');
-                supportModal.classList.remove('active');
                 bodyElement.classList.remove('modal-open');
             }
 
-            openRequestBtns.forEach(btn => btn.addEventListener('click', () => {
-                closeDrawer();
-                openPopup(requestModal);
-            }));
-            
+            openRequestBtns.forEach(btn => btn.addEventListener('click', () => openPopup(requestModal)));
             if(closeModalBtn) closeModalBtn.addEventListener('click', closePopups);
-
-            if(drawerSupportBtn) {
-                drawerSupportBtn.addEventListener('click', () => {
-                    closeDrawer();
-                    openPopup(supportModal);
+            
+            if(requestModal) {
+                requestModal.addEventListener('click', (e) => {
+                    if(e.target === requestModal) { closePopups(); }
                 });
             }
-            if(closeSupportModalBtn) closeSupportModalBtn.addEventListener('click', closePopups);
-            
-            [requestModal, supportModal].forEach(modal => {
-                if(modal) {
-                    modal.addEventListener('click', (e) => {
-                        if(e.target === modal) { closePopups(); }
-                    });
-                }
-            });
 
-            /* GMAIL ENDS WITH VALIDATION FORMAT */
             function isInvalidGmail(emailValue) {
                 return !emailValue.toLowerCase().endsWith('@gmail.com');
             }
 
-            // Client Form Verification
             const submissionForm = document.getElementById('submissionForm');
             if(submissionForm) {
                 submissionForm.addEventListener('submit', function(e) {
@@ -928,18 +1277,17 @@
                 });
             }
 
-            // Support Form Verification
-            const supportForm = document.getElementById('supportForm');
-            if(supportForm) {
-                supportForm.addEventListener('submit', function(e) {
-                    const supportEmail = document.getElementById('supportEmail').value.trim();
-                    if (isInvalidGmail(supportEmail)) {
+            const supportForms = document.querySelectorAll('.staticSupportForm');
+            supportForms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    const emailInput = form.querySelector('.userSupportEmailInput');
+                    if (emailInput && isInvalidGmail(emailInput.value.trim())) {
                         e.preventDefault();
                         alert('Please submit a verified, working Gmail address format (@gmail.com).');
-                        document.getElementById('supportEmail').focus();
+                        emailInput.focus();
                     }
                 });
-            }
+            });
         })();
     </script>
 </body>
