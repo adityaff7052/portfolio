@@ -85,7 +85,7 @@
             overflow: hidden;
         }
 
-        /* --- PRELOADER INTRO SCREEN WITH DYNAMIC CONVERGENCE FLIGHT --- */
+        /* --- PRELOADER INTRO SCREEN - CINEMATIC SLOW FLIGHT CONFIGURATION --- */
         #preloader {
             position: fixed;
             top: 0;
@@ -97,7 +97,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            /* Extra slow overall fade to let user track the transformation */
+            transition: opacity 3.5s cubic-bezier(0.1, 0.9, 0.1, 1);
             will-change: opacity;
         }
 
@@ -109,7 +110,8 @@
         .preloader-terminal-container {
             text-align: center;
             padding: 2rem;
-            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1), filter 1.0s ease;
+            /* Slower transition speed (3.5s) with custom tracking cubic-bezier */
+            transition: transform 3.5s cubic-bezier(0.1, 0.9, 0.1, 1), opacity 3.2s cubic-bezier(0.1, 0.9, 0.1, 1), filter 3.2s ease;
             will-change: transform, opacity, filter;
             transform-origin: center center;
         }
@@ -130,24 +132,22 @@
             animation: preloaderLogoPulse 1.6s infinite alternate ease-in-out;
         }
 
+        .preloader-welcome-text {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #64748b;
+            letter-spacing: 0.12rem;
+            text-transform: uppercase;
+            margin-bottom: 0.2rem;
+        }
+
         .preloader-identity-title {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 900;
             color: #ffffff;
             letter-spacing: 0.05rem;
             text-transform: uppercase;
-            margin-bottom: 0.4rem;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-        }
-
-        .preloader-welcome-orange {
-            font-size: 2.0rem;
-            font-weight: 800;
-            color: #f97316;
-            letter-spacing: 0.2rem;
-            text-transform: uppercase;
-            margin-top: 0.5rem;
-            text-shadow: 0 0 10px rgba(249, 115, 22, 0.3);
         }
 
         @keyframes preloaderLogoPulse {
@@ -797,7 +797,6 @@
         @media (max-width: 768px) {
             .hero-title { font-size: 2.6rem; }
             
-            /* Hide individual links in header, show only hamburger menu section on mobile devices */
             .nav-links-desktop { display: none; }
             .cyber-hamburger-trigger { display: flex; }
             
@@ -809,17 +808,19 @@
 </head>
 <body>
 
+    <!-- Slower and Extra Smooth Structural Flying Preloader Base Component -->
     <div id="preloader">
         <div class="preloader-terminal-container">
-            <img src="my-logo.jpg" alt="Logo" class="preloader-brand-logo" onerror="this.style.display='none';">
+            <div class="preloader-welcome-text">Welcome to</div>
             <h1 class="preloader-identity-title">Aditya Devs</h1>
-            <div class="preloader-welcome-orange">Welcome</div>
+            <img src="my-logo.jpg" alt="Logo" class="preloader-brand-logo" onerror="this.style.display='none';">
         </div>
     </div>
 
     <canvas id="data-dust-canvas"></canvas>
     <div id="theme-ripple-layer"></div>
 
+    <!-- Main Dynamic Header Bar Area -->
     <header>
         <div class="nav-container">
             <div class="brand-wrapper">
@@ -851,6 +852,7 @@
         </div>
     </header>
 
+    <!-- Mobile Drawer Container Menu -->
     <div class="mobile-navigation-drawer" id="mobileNavigationDrawer">
         <div class="drawer-header">
             <button class="drawer-back-btn" id="drawerBackBtn">← Back</button>
@@ -1068,7 +1070,8 @@
                     const preloaderElement = document.getElementById('preloader');
                     const preloaderContent = document.querySelector('.preloader-terminal-container');
                     const headerBrandTarget = document.querySelector('.brand-wrapper');
-                    const orangeWelcomeWord = document.querySelector('.preloader-welcome-orange');
+                    const welcomeTextNode = document.querySelector('.preloader-welcome-text');
+                    const identityTitleNode = document.querySelector('.preloader-identity-title');
 
                     if(preloaderElement && preloaderContent && headerBrandTarget) {
                         const sourceBox = preloaderContent.getBoundingClientRect();
@@ -1082,15 +1085,21 @@
                         const distanceX = targetCenterX - sourceCenterX;
                         const distanceY = targetCenterY - sourceCenterY;
 
-                        if (orangeWelcomeWord) {
-                            orangeWelcomeWord.style.transition = 'opacity 0.3s ease';
-                            orangeWelcomeWord.style.opacity = '0';
+                        // Slower ghost-fade for text nodes during transition (2.5 seconds)
+                        if (welcomeTextNode) {
+                            welcomeTextNode.style.transition = 'opacity 2.5s ease-out';
+                            welcomeTextNode.style.opacity = '0';
+                        }
+                        if (identityTitleNode) {
+                            identityTitleNode.style.transition = 'opacity 2.5s ease-out';
+                            identityTitleNode.style.opacity = '0.15'; 
                         }
 
+                        // Initiates the extended ultra-slow 3.5s flight path calculation
                         preloaderContent.style.transform = `translate(${distanceX}px, ${distanceY}px) scale(0.32)`;
                         preloaderElement.classList.add('loaded');
                     }
-                }, 1800); 
+                }, 2200); // Wait time before launching the transition sequence
             });
 
             // --- NAVIGATION DRAWER LOGIC CORE ---
